@@ -12,7 +12,7 @@ Base = declarative_base()
 
 Base.query = db_session.query_property()
 
-class Post(Base):
+class Posts(Base):
     __tablename__ = 'posts'
     id = Column(Integer, primary_key=True)
     post_url = Column(String(150), unique=True, index=True)
