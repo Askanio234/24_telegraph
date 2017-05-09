@@ -11,7 +11,9 @@ def form():
         return render_template('form.html', show_button=True,
                                 header="", signature="", body="")
     if request.method == 'POST':
-        post_id = request.form['header'] + str(datetime.date.today())  
+        post_id = '{}-{}'.format(
+                            request.form['header'].replace(" ","-"),
+                            str(datetime.date.today()))  
         post_to_add = Posts(post_url=post_id,
                             post_header=request.form['header'],
                             post_signature=request.form['signature'],
