@@ -6,6 +6,7 @@ from db_schema import db_session, Posts
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def form():
     if request.method == 'GET':
@@ -37,6 +38,7 @@ def posts_by_id(post_id):
                             header=post_to_show.post_header,
                             signature=post_to_show.post_signature,
                             body=post_to_show.post_body)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
