@@ -1,4 +1,5 @@
 import datetime
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from sqlalchemy import exc
 from db_schema import db_session, Posts
@@ -41,4 +42,5 @@ def posts_by_id(post_id):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
