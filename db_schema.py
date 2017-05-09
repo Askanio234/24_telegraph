@@ -8,11 +8,11 @@ engine = create_engine('sqlite:///telegraph.sqlite')
 
 db_session = scoped_session(sessionmaker(bind=engine))
 
-Base = declarative_base()
+data_base = declarative_base()
 
-Base.query = db_session.query_property()
+data_base.query = db_session.query_property()
 
-class Posts(Base):
+class Posts(data_base):
     __tablename__ = 'posts'
     id = Column(Integer, primary_key=True)
     post_url = Column(String(150), unique=True, index=True)
@@ -24,4 +24,4 @@ class Posts(Base):
         return "post titled {} by {}".format(self.post_header, self.post_signature)
 
 if __name__ == '__main__':
-    Base.metadata.create_all(bind=engine)
+    data_base.metadata.create_all(bind=engine)
