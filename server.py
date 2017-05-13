@@ -26,7 +26,7 @@ def form():
             return redirect(url_for('posts_by_slug', post_slug=post_slug))
         except exc.IntegrityError:
             db_session.rollback()
-            return "Something went very bad, try again later"
+            abort(500)
 
 
 @app.route('/posts/<post_slug>')
@@ -48,7 +48,7 @@ def posts_by_slug(post_slug):
 def page_not_found(e):
     return render_template('404.html'), 404
 
-# host='0.0.0.0'
+
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(port=port)
+    app.run(host='0.0.0.0', port=port)
