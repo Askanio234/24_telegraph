@@ -15,25 +15,25 @@ def form():
                                 header="", signature="", body="")
     if request.method == 'POST':
         try:
-            post_id = '{}-{}'.format(
+            post_slug = '{}-{}'.format(
                                 request.form['header'].replace(" ","-"),
                                 str(datetime.date.today()))  
-            post_to_add = Posts(post_url=post_id,
+            post_to_add = Posts(post_url=post_slug,
                                 post_header=request.form['header'],
                                 post_signature=request.form['signature'],
                                 post_body=request.form['body'])
             db_session.add(post_to_add)
             db_session.commit()
-            return redirect(url_for('posts_by_id', post_id=post_id))
+            return redirect(url_for('posts_by_id', post_slug=post_slug))
         except exc.IntegrityError:
             db_session.rollback()
             return "Something went very bad, try again later"
 
 
-@app.route('/posts/<post_id>')
-def posts_by_id(post_id):
+@app.route('/posts/<post_slug>')
+def posts_by_id(post_slug):
     post_to_show = db_session.query(Posts).filter(
-                                        Posts.post_url == post_id
+                                        Posts.post_url == post_slug
                                         ).first()
     if post_to_show is not None:
         return render_template('form.html', show_button=False,
