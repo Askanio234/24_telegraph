@@ -16,7 +16,7 @@ def form():
                                 header="", signature="", body="")
     if request.method == 'POST':
         try:
-            post_slug = random_slug(SLUG_LENGTH) 
+            post_slug = random_slug(SLUG_LENGTH)
             post_to_add = Posts(post_url=post_slug,
                                 post_header=request.form['header'],
                                 post_signature=request.form['signature'],
