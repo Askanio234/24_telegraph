@@ -24,14 +24,14 @@ def form():
                                 post_body=request.form['body'])
             db_session.add(post_to_add)
             db_session.commit()
-            return redirect(url_for('posts_by_id', post_slug=post_slug))
+            return redirect(url_for('posts_by_slug', post_slug=post_slug))
         except exc.IntegrityError:
             db_session.rollback()
             return "Something went very bad, try again later"
 
 
 @app.route('/posts/<post_slug>')
-def posts_by_id(post_slug):
+def posts_by_slug(post_slug):
     post_to_show = db_session.query(Posts).filter(
                                         Posts.post_url == post_slug
                                         ).first()
