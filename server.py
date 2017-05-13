@@ -1,9 +1,10 @@
-import datetime
 import os
 from flask import Flask, render_template, request, redirect, url_for, abort
 from sqlalchemy import exc
 from db_schema import db_session, Posts
+from generate_slug import random_slug
 
+SLUG_LENGTH = 10
 
 app = Flask(__name__)
 
@@ -15,9 +16,7 @@ def form():
                                 header="", signature="", body="")
     if request.method == 'POST':
         try:
-            post_slug = '{}-{}'.format(
-                                request.form['header'].replace(" ","-"),
-                                str(datetime.date.today()))  
+            post_slug = random_slug(SLUG_LENGTH) 
             post_to_add = Posts(post_url=post_slug,
                                 post_header=request.form['header'],
                                 post_signature=request.form['signature'],
