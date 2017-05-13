@@ -28,6 +28,9 @@
 
     <div class="container">
       <form method="POST">
+        {% if disabled %}
+        <fieldset disabled="disabled">
+        {% endif %}
         <div class="form-group">
           <input name="header" class="form-control" placeholder="Заголовок" value="{{ header }}" autofocus/>
         </div>
@@ -37,6 +40,9 @@
         <div class="form-group">
           <textarea name="body" class="form-control" rows="10" placeholder="Ваша история">{{ body }}</textarea>
         </div>
+        {% if disabled %}
+        </fieldset>
+        {% endif %}
         {% if show_button %}
         <div class="form-group">
           <button class="btn btn-primary" id="start" type="submit">Опубликовать</button>

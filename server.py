@@ -37,6 +37,7 @@ def posts_by_id(post_id):
                                         ).first()
     if post_to_show is not None:
         return render_template('form.html', show_button=False,
+                                disabled=True,
                                 header=post_to_show.post_header,
                                 signature=post_to_show.post_signature,
                                 body=post_to_show.post_body)
@@ -48,7 +49,7 @@ def posts_by_id(post_id):
 def page_not_found(e):
     return render_template('404.html'), 404
 
-
+# host='0.0.0.0'
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(port=port)
